@@ -17,25 +17,25 @@ Task Automation and Scheduling is a critical component of modern Platform Engine
 
 ## Features
 
-1. **Task Definition and Management:** Users can easily define tasks through an intuitive interface or a configuration file. Each task includes execution commands, input parameters, and dependency specifications. The platform allows users to create, update, delete, and monitor their scheduled jobs.
+**Task Definition and Management:** Users can easily define tasks through an intuitive interface or a configuration file. Each task includes execution commands, input parameters, and dependency specifications. The platform allows users to create, update, delete, and monitor their scheduled jobs.
 
-2. **Scheduling Engine:** The project incorporates a powerful scheduling engine that supports diverse scheduling types, such as fixed intervals, cron-like expressions, and date-based schedules. Tasks can also be prioritized, ensuring critical tasks receive higher precedence for execution.
+**Scheduling Engine:** The project incorporates a powerful scheduling engine that supports diverse scheduling types, such as fixed intervals, cron-like expressions, and date-based schedules. Tasks can also be prioritized, ensuring critical tasks receive higher precedence for execution.
 
-3. **Distributed Execution:** To ensure scalability and handle high workloads, the platform implements a distributed execution system. This involves a cluster of worker nodes that execute tasks concurrently, distributing the load efficiently.
+**Distributed Execution:** To ensure scalability and handle high workloads, the platform implements a distributed execution system. This involves a cluster of worker nodes that execute tasks concurrently, distributing the load efficiently.
 
-4. **Task Monitoring and Logging:** Users can monitor task status, including successful completions, failures, or pending execution. Comprehensive logging captures task outputs and errors, facilitating later analysis.
+**Task Monitoring and Logging:** Users can monitor task status, including successful completions, failures, or pending execution. Comprehensive logging captures task outputs and errors, facilitating later analysis.
 
-5. **Error Handling and Retry Mechanism:** The platform gracefully manages task failures by notifying users and automatically retrying tasks based on predefined policies. Users can customize the number of retries and intervals between retries.
+**Error Handling and Retry Mechanism:** The platform gracefully manages task failures by notifying users and automatically retrying tasks based on predefined policies. Users can customize the number of retries and intervals between retries.
 
-6. **Security and Access Control:** Robust user authentication and access control mechanisms safeguard task definition, scheduling, and management functions. Users enjoy granular control over permissions, ensuring secure task management.
+**Security and Access Control:** Robust user authentication and access control mechanisms safeguard task definition, scheduling, and management functions. Users enjoy granular control over permissions, ensuring secure task management.
 
-7. **Alerting and Notifications:** An integrated alerting system informs users of task failures or errors, allowing them to choose their preferred notification channels, such as email, Slack, or SMS.
+**Alerting and Notifications:** An integrated alerting system informs users of task failures or errors, allowing them to choose their preferred notification channels, such as email, Slack, or SMS.
 
-8. **Dashboard and Reporting:** The user-friendly dashboard provides an overview of scheduled tasks, execution history, and resource utilization. Task execution metrics and reports facilitate performance analysis.
+**Dashboard and Reporting:** The user-friendly dashboard provides an overview of scheduled tasks, execution history, and resource utilization. Task execution metrics and reports facilitate performance analysis.
 
-9. **Scalability and Performance:** The project prioritizes performance optimization and scalability, catering to growing task volumes and user demands. Horizontal scaling, load balancing, and caching strategies contribute to improved performance.
+**Scalability and Performance:** The project prioritizes performance optimization and scalability, catering to growing task volumes and user demands. Horizontal scaling, load balancing, and caching strategies contribute to improved performance.
 
-10. **Integration with External Systems:** Integration with version control systems (e.g., Git) automates task triggering upon specific branch changes. Additionally, collaboration with cloud providers and container orchestrators maximizes resource utilization.
+**Integration with External Systems:** Integration with version control systems (e.g., Git) automates task triggering upon specific branch changes. Additionally, collaboration with cloud providers and container orchestrators maximizes resource utilization.
 
 ## Architecture
 
@@ -57,4 +57,3 @@ The development of this project involved research and inspiration from various e
 - Apache Kafka: Distributed event streaming platform, valuable for handling task events and triggers.
 - Apache Airflow: Workflow automation and scheduling platform, offering insights into task orchestration.
 - AWS Batch: Managed batch computing service, providing insights into task execution and resource management.
-
