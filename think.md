@@ -139,3 +139,21 @@ servers - leader & followers
 - replication across servers  
   workers - clients
 - use rpc to communicate with servers
+
+Operators should define how Tasks are executed => BashOperator, PythonOperator, GoOperator, DockerOperator
+
+DataSources define data/ params for the task -> move data between Tasks
+
+\=> Components of Master Node - Control Plane
+
+- In memory persistent storage - etcd
+- scheduler
+- api-server
+- controller manager
+- Plugin Controller - connect to trigger external workloads
+
+\=> Components of Worker Nodes
+
+- proxy - for network routing
+- Task Operators
+- Task Agent
