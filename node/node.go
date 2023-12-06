@@ -8,8 +8,6 @@ type Node struct {
 	MemoryAllocated int
 	Disk            int
 	DiskAllocated   int
-	Role            string
-	TaskCount       int
 }
 
 // node information is sourced when node joins the cluster and sent to master
@@ -21,3 +19,7 @@ type Node struct {
 func (n *Node) GetMetrics(name string, ip string) (*Node, error) {
 	return n, nil
 }
+
+// Node Agent
+// gathers information about the node
+//

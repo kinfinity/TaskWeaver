@@ -6,9 +6,9 @@ package main
 import (
 	"TaskWeaver/manager"
 	"TaskWeaver/node"
+	"TaskWeaver/node/worker"
 	"TaskWeaver/task"
 	"TaskWeaver/utils"
-	"TaskWeaver/worker"
 	"fmt"
 	"time"
 
