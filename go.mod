@@ -1,4 +1,4 @@
-module TaskWeaver
+module taskWeaver
 
 go 1.18
 

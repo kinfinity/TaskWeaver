@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package core;
+option go_package = ".;core";
+
+message Task {
+    string taskId = 1;
+    string taskDetails = 2;
+    // task attributes, status, etc.
+}
+
+message TaskUpdate {
+    string taskId = 1;
+    string updateDetails = 2;
+    // progress, status changes, etc.
+}
+
+message Request {
+    string action = 1;
+}
+
+message Response {
+    string data = 1;
+}
+
+service NodeService {
+    
+    rpc GetNodeInfo(Request) returns (Response);
+    rpc AuthenticateNode(Request) returns (Response);
+    rpc UpdateNodeStatus(Request) returns (Response);
+
+    // Task management and communication
+    rpc AssignTask(Request) returns (stream Response);
+    rpc UpdateTaskStatus(Request) returns (stream Response);
+    rpc GetTaskStatus(Request) returns (Response);
+    rpc CancelTask(Request) returns (Response);
+    rpc GetTaskList(Request) returns (stream Task);
+    rpc AcknowledgeTaskCompletion(Request) returns (Response);
+    rpc HandleTaskError(Request) returns (Response);
+    rpc SendTaskProgress(TaskUpdate) returns (Response);
+
+}
+
+
+// server-side rpc can allow data to be sent from master via stream
+
