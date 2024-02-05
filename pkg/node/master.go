@@ -1,17 +1,18 @@
 package node
 
 import (
-	"TaskWeaver/node/core"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"fmt"
+	"io"
 	"log"
 	"math/big"
 	"net"
 	"os"
+	"taskweaver/pkg/node/core"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -54,7 +55,7 @@ func (ma *MasterAgent) Start() {
 
 func (ma *MasterAgent) Init() (err error) {
 	// create listener
-	ma.ln, err = net.Listen("tcp", ":"+ma.Config().Port())
+	ma.ln, err = net.Listen("tcp", "")
 	if err != nil {
 		return err
 	}
@@ -174,7 +175,7 @@ func (n *MasterAgent) ProcessCSR(csrBytes []byte) (certBytes []byte, err error) 
 	fileInfo, err := caPrivateKey.Stat()
 
 	// Load content into buffer
-	var caPrivBuf := make([]byte, fileInfo.Size())
+	var caPrivBuf = make([]byte, fileInfo.Size())
 	_, err = caPrivateKey.Read(caPrivBuf)
 	if err != nil && err != io.EOF {
 		log.Fatalf("Error reading file: %v", err)

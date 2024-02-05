@@ -1,7 +1,6 @@
 package node
 
 import (
-	"context"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/tls"
@@ -13,9 +12,8 @@ import (
 	"math/big"
 	"os"
 	"strings"
-	"taskWeaver/pkg/node"
-	"taskWeaver/pkg/node/core"
-	"taskWeaver/pkg/task"
+	"taskweaver/pkg/node/core"
+	"taskweaver/pkg/task"
 	"time"
 
 	"github.com/golang-collections/collections/queue"
@@ -47,35 +45,11 @@ func GetWorkerAgent() *WorkerAgent {
 		workerAgent = &WorkerAgent{}
 
 		// initialize on Node
-		if err := workerAgent.Init(); err != nil {
-			panic(err)
-		}
+		// if err := workerAgent.Init(); err != nil {
+		// 	panic(err)
+		// }
 	}
 	return workerAgent
-}
-
-func (wa *WorkerAgent) Init() (err error) {
-	// Get Node Information
-	opts, err := node.GetGrpcOpts()
-
-	// Setup certificates
-	// Generate node private key
-
-	// connect to master agent
-	conn, err := grpc.Dial(*masterAddr, grpc.WithInsecure())
-	if err != nil {
-		return err
-	}
-
-	wa.c = NewNodeServiceClient(wa.conn)
-	return nil
-}
-
-func (wa *WorkerAgent) Start() error {
-	_, _ = wa.c.ReportStatus(context.Background(), &Request{})
-
-	for {
-	}
 }
 
 func (n *WorkerAgent) GenerateCSR() (err error) {
@@ -98,6 +72,7 @@ func (n *WorkerAgent) GenerateCSR() (err error) {
 		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageClientAuth},
 		BasicConstraintsValid: true,
 	}
+	println(nodeTemplate)
 
 	// node certificate signing request template
 	nodeCSRTemplate := x509.CertificateRequest{
@@ -111,6 +86,7 @@ func (n *WorkerAgent) GenerateCSR() (err error) {
 	}
 	// Encode CSR to PEM format
 	csrPEM := pem.EncodeToMemory(&pem.Block{Type: "CERTIFICATE REQUEST", Bytes: csrBytes})
+	println(csrPEM)
 
 	// write certificate to file
 	certificatePath := []string{"/etc/ssl/certs/", n.Name, ".crt"}
@@ -118,7 +94,7 @@ func (n *WorkerAgent) GenerateCSR() (err error) {
 	if err != nil {
 		log.Fatalf("Error creating node certificate file: %v", err)
 	}
-	pem.Encode(certificateFile, &pem.Block{Type: "CERTIFICATE", Bytes: _}) // pick workerCertBytes from return stream
+	pem.Encode(certificateFile, &pem.Block{Type: "CERTIFICATE", Bytes: []byte{}}) // pick workerCertBytes from return stream
 	certificateFile.Close()
 
 	// Load worker node certificate and private key for gRPC server/client configuration
@@ -132,6 +108,7 @@ func (n *WorkerAgent) GenerateCSR() (err error) {
 		Certificates: []tls.Certificate{workerCert},
 	})
 
+	println(creds)
 	return nil
 
 }

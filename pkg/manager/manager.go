@@ -1,7 +1,7 @@
 package manager
 
 import (
-	"taskWeaver/pkg/task"
+	"taskweaver/pkg/task"
 
 	"github.com/golang-collections/collections/queue"
 	"github.com/google/uuid"

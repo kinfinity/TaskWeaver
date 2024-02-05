@@ -13,15 +13,8 @@ func NewNodeCommand() *cobra.Command {
 		Long:    "",
 		Example: "",
 		Run: func(cmd *cobra.Command, args []string) {
-			o, err := flags.ToOptions(f, cmd, baseName, args)
-			//validate options
-			// run cmd
-			o.Run()
+
 		},
 	}
 	return cmd
-}
-
-func (o *NodeOptions) Run() error {
-	return nil
 }
