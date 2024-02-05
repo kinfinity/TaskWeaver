@@ -1,0 +1,60 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+NUM_WORKER_NODES = 2
+IP_NW = "10.0.0."
+IP_START = 10
+
+master_configuration = {
+  name: "taskmaster",
+  ram: 8192,
+  cpus: 2,
+  index: 0,
+}
+
+worker_configuration = {
+  name: "soldier",
+  ram: 4096,
+  cpus: 2,
+}
+
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update -y
+    echo "#{IP_NW}#{IP_START} taskmaster" >> /etc/hosts
+    (1..NUM_WORKER_NODES).each do |i|
+      echo "#{IP_NW}#{IP_START}+{i} soldier0{i}" >> /etc/hosts
+    end
+  SHELL
+
+  config.vm.box = "bento/ubuntu-21.04"
+  config.vm.box_check_update = true
+  config.vm.boot_timeout = 3600
+
+  config.vm.define "master" do |master|
+    configure_vm(master, master_configuration)
+    master.vm.provision "shell", path: "scripts/common.sh"
+    master.vm.provision "shell", path: "scripts/master.sh"
+  end
+
+  (1..NUM_WORKER_NODES).each do |i|
+    config.vm.define "node0#{i}" do |node|
+      configure_vm(node, worker_configuration)
+      node.vm.provision "shell", path: "scripts/common.sh"
+      node.vm.provision "shell", path: "scripts/node.sh"
+    end
+  end
+end
+
+def configure_vm(vm, config)
+  vm.vm.hostname = "#{config[:name]}-node"
+  vm.vm.network "private_network", ip: "#{IP_NW}#{IP_START + config[:index]}"
+  vm.vm.provider "virtualbox" do |vb|
+    vb.memory = config[:ram]
+    vb.cpus = config[:cpus]
+  end
+end
+
+# Create all nodes & install TaskWeaver on the master node  
+# while Worker nodes are added via the (join.sh) | [ secure api calls to the master ] client -> , master configures TaskWeaver Worker components on Nodes
+# Testing TaskWeaver with Linux Nodes only
