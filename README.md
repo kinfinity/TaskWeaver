@@ -41,6 +41,8 @@ Task Automation and Scheduling is a critical component of modern Platform Engine
 
 The architecture of this platform revolves around distributed job scheduling. It leverages a combination of single-node and cluster setups to efficiently manage tasks. This architecture accommodates various platforms and environments, making it adaptable to Windows, Linux, and macOS operating systems.
 
+[https://lucid.app/lucidspark/3b091858-07f0-4443-ad49-5b87a11b78e0/edit?invitationId=inv_e966ce87-b4b7-4572-962f-bf8879dee5e3](https://lucid.app/lucidspark/3b091858-07f0-4443-ad49-5b87a11b78e0/edit?invitationId=inv_e966ce87-b4b7-4572-962f-bf8879dee5e3)
+
 ## Plugin System
 
 A plugin system enhances the project's extensibility and versatility. It introduces a well-defined plugin interface, a registry for plugin management, dynamic loading capabilities, and user-configurable plugins. This system enables users to define custom task types, integrate with external systems, enhance scheduling options, and expand notification channels.
