@@ -51,7 +51,7 @@ func InitializeConfig(logger *log.Logger, configDir string, configFilePath strin
 		ClientName:  "weaver",
 		Environment: "",
 		LogLevel:    "info",
-		LogFile:     homeDir + "/.weaver/weaver.log",
+		LogFile:     homeDir + "/.weaver/config/weaver.log",
 	}
 	config := Config{
 		WeaverConfig: weaverConfig,
