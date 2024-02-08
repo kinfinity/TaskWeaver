@@ -28,13 +28,6 @@ EOF
 sudo modprobe overlay
 sudo modprobe br_netfilter
 
-# Set up required sysctl params, these persist across reboots.
-cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.ipv4.ip_forward                 = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-EOF
-
 sudo sysctl --system
 
 cat <<EOF | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
@@ -58,10 +51,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable crio --now
 
 echo "CRI runtime installed susccessfully"
-
-sudo apt-get update
-sudo apt-get install -y apt-transport-https ca-certificates curl
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
 sudo apt-get update -y
 # install and setup components

@@ -138,7 +138,7 @@ func initWeaver(logger *log.Logger, cmd *cobra.Command, configFilePath string, c
 func setupConfig(logger *log.Logger, configName string) (configDir string) {
 	// Check config in home
 	homeDir, _ := os.UserHomeDir()
-	configDir = path.Join(homeDir, ".weaver")
+	configDir = path.Join(homeDir, ".weaver/config")
 	configFilePath := path.Join(configDir, "/", configName)
 	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
 		// Initialize default config
