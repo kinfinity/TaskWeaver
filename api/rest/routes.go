@@ -3,10 +3,12 @@ package rest
 import (
 	"net/http"
 	"taskweaver/api/middleware"
+
+	"github.com/gorilla/mux"
 )
 
 type Router interface {
-	SetupRoutes()
+	setupRoutes()
 }
 
 type Route struct {
@@ -32,4 +34,23 @@ func NewRouteWithMiddleware(method, path string, handler http.HandlerFunc, middl
 func (r Route) WithMiddlewares(mw ...middleware.MiddlewareFunc) Route {
 	r.middleware = append(r.middleware, mw...)
 	return r
+}
+
+func Routes2MuxRouter(mr *mux.Router, routes []Route) {
+	// Add routes to the Router
+	for _, route := range routes {
+		// create new route on mux router
+		muxRoute := mr.NewRoute().Methods(string(route.Verb)).Path(route.Path)
+		// If there are middleware functions defined for this route add them
+		if len(route.middleware) > 0 {
+			handler := route.Handler
+			for i := len(route.middleware) - 1; i >= 0; i-- {
+				handler = route.middleware[i](handler)
+			}
+			muxRoute.Handler(handler)
+		} else {
+			muxRoute.HandlerFunc(route.Handler)
+		}
+	}
+
 }

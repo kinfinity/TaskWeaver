@@ -3,8 +3,11 @@ package rest
 import (
 	"errors"
 	"fmt"
+	"log"
 	"regexp"
 	"strings"
+
+	"github.com/gorilla/mux"
 )
 
 type RestError struct {
@@ -34,7 +37,7 @@ func isValidHTTPVerb(verb HTTPVerb) bool {
 func NewHTTPVerb(value string) (HTTPVerb, error) {
 	newVerb := HTTPVerb(strings.ToUpper(value))
 	if !isValidHTTPVerb(newVerb) {
-		return "", errors.New("Invalid HTTP verb")
+		return "", errors.New("invalid HTTP verb")
 	}
 	return newVerb, nil
 }
@@ -58,7 +61,7 @@ func isValidContentType(contentType ContentType) bool {
 
 func UseContentType(contentType ContentType) ContentType {
 	if !isValidContentType(contentType) {
-		err := errors.New("Invalid content type")
+		err := errors.New("invalid content type")
 		fmt.Println(err)
 		return ""
 	}
@@ -70,4 +73,16 @@ type RequestPath string
 func isValidRequestPath(path RequestPath) bool {
 	pathRegex := regexp.MustCompile(`^(/[\w-]+(/[a-zA-Z0-9-_]+)*)?$`)
 	return pathRegex.MatchString(string(path))
+}
+
+func PrintMuxRoutes(logger *log.Logger, router *mux.Router) {
+	logger.Println("Registered Routes:")
+	router.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
+		path, err := route.GetPathTemplate()
+		if err == nil {
+			methods, _ := route.GetMethods()
+			logger.Printf("Path: %s, Methods: %v\n", path, methods)
+		}
+		return err
+	})
 }
