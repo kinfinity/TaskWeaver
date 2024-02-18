@@ -19,7 +19,7 @@ func init() {
 	if Version == "dev" {
 		version, err := getVersionFromGit()
 		if err != nil {
-			log.Printf("Failed to get version from git")
+			log.Printf("Failed to get version from git tags")
 			// log.Panic("Error getting version from git:", err)
 			// don't panic - fallback on dev
 		}

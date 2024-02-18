@@ -7,4 +7,4 @@ type Middleware interface {
 }
 
 // Signature for Middleware
-type MiddlewareFunc func(http.Handler) http.Handler
+type MiddlewareFunc func(http.Handler) http.HandlerFunc

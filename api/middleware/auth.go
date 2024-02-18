@@ -14,7 +14,7 @@ func NewAuthMiddleware() *AuthMiddleware {
 
 // Authenticate is the middleware function for authentication
 func (am *AuthMiddleware) HandleMiddleware() MiddlewareFunc {
-	return func(next http.Handler) http.Handler {
+	return func(next http.Handler) http.HandlerFunc {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			// Extract the authentication token from the request header
 			token := r.Header.Get("Authorization")

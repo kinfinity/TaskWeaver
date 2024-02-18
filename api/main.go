@@ -12,7 +12,7 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	server := server.NewServer(
 		server.NewConfig(
-			server.WithPortAndAddress("localhost", 3000),
+			server.WithPortAndAddress("localhost:", 3000),
 			server.WithHTTPConfig(&http.Client{}),
 			server.WithTLSConfig(&tls.Config{}),
 		),
@@ -20,5 +20,4 @@ func main() {
 	)
 
 	server.ListenAndServe()
-	return
 }
