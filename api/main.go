@@ -21,3 +21,5 @@ func main() {
 
 	server.ListenAndServe()
 }
+
+// $(go env GOPATH)/bin/swag init

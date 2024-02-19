@@ -9,12 +9,14 @@ import (
 	"os/signal"
 	"strconv"
 	"syscall"
+	_ "taskweaver/api/docs"
 	"taskweaver/api/middleware"
 	"taskweaver/api/node"
 	"taskweaver/api/rest"
 	"time"
 
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 type server struct {
@@ -53,6 +55,9 @@ func NewServer(config *ServerConfig, router *mux.Router) *server {
 
 	// Initialize all Routers and Routes w Middleware
 	router.NewRoute().Methods("GET").PathPrefix(api_version + "/").HandlerFunc(HealthCheck)
+	router.PathPrefix("/swagger/").Handler(httpSwagger.Handler(
+		httpSwagger.URL("/swagger/doc.json"), // The url pointing to API definition
+	))
 	nodeRouter := node.NewNodeRouter(router, api_version+"/nodes", authM)
 
 	// append nodeRouter to rest.Router list
@@ -81,7 +86,7 @@ func (s *server) ListenAndServe() error {
 	}
 
 	s.httpServer = &http.Server{
-		Addr:           s.config.address + ":" + strconv.Itoa(int(s.config.port)),
+		Addr:           s.config.address + strconv.Itoa(int(s.config.port)),
 		Handler:        s.baseRouter,
 		ReadTimeout:    5 * time.Second,
 		WriteTimeout:   10 * time.Second,
@@ -93,6 +98,7 @@ func (s *server) ListenAndServe() error {
 	errChan := make(chan error)
 	go func() {
 		s.logger.Printf("%s listening on :%d", AppName, s.config.port)
+		s.logger.Printf("listening on :%s", s.httpServer.Addr)
 		errChan <- s.httpServer.ListenAndServe()
 	}()
 
