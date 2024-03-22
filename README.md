@@ -2,19 +2,6 @@
 
 TaskWeaver is a comprehensive platform designed to streamline task management, automate repetitive processes, and enhance overall system efficiency. By providing users with a user-friendly interface and advanced scheduling capabilities, this project empowers Platform Engineering teams to optimize their workflows and reduce manual intervention.
 
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Plugin System](#plugin-system)
-- [Integration with External Systems](#integration-with-external-systems)
-- [Research](#research)
-
-## Introduction
-
-Task Automation and Scheduling is a critical component of modern Platform Engineering. This project aims to offer a robust solution for defining, scheduling, and executing various tasks, enabling users to automate routine activities, minimize errors, and enhance productivity. From managing simple recurring tasks to orchestrating complex workflows, this platform provides the tools necessary to achieve these goals effectively.
-
 ## Features
 
 **Task Definition and Management:** Users can easily define tasks through an intuitive interface or a configuration file. Each task includes execution commands, input parameters, and dependency specifications. The platform allows users to create, update, delete, and monitor their scheduled jobs.
@@ -37,19 +24,9 @@ Task Automation and Scheduling is a critical component of modern Platform Engine
 
 **Integration with External Systems:** Integration with version control systems (e.g., Git) automates task triggering upon specific branch changes. Additionally, collaboration with cloud providers and container orchestrators maximizes resource utilization.
 
-## Architecture
-
-The architecture of this platform revolves around distributed job scheduling. It leverages a combination of single-node and cluster setups to efficiently manage tasks. This architecture accommodates various platforms and environments, making it adaptable to Windows, Linux, and macOS operating systems.
-
-[https://lucid.app/lucidspark/3b091858-07f0-4443-ad49-5b87a11b78e0/edit?invitationId=inv_e966ce87-b4b7-4572-962f-bf8879dee5e3](https://lucid.app/lucidspark/3b091858-07f0-4443-ad49-5b87a11b78e0/edit?invitationId=inv_e966ce87-b4b7-4572-962f-bf8879dee5e3)
-
 ## Plugin System
 
 A plugin system enhances the project's extensibility and versatility. It introduces a well-defined plugin interface, a registry for plugin management, dynamic loading capabilities, and user-configurable plugins. This system enables users to define custom task types, integrate with external systems, enhance scheduling options, and expand notification channels.
-
-## Integration with External Systems
-
-The project integrates seamlessly with external systems, such as Kubernetes (K8s), Apache Kafka, Apache Airflow, and AWS Batch. These integrations provide users with additional options for managing tasks, enhancing scalability, and leveraging industry-standard tools.
 
 ## Research
 
